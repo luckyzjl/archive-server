@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+    <context id="mysqlTables" targetRuntime="MyBatis3">
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://118.31.126.98:3306/xingyu"
+                        userId="admin" password="XingYu@2019"/>
+
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <javaModelGenerator targetPackage="com.xingyu.domain.po" targetProject="src/main/java/">
+            <property name="enableSubPackages" value="true"/>
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="com.xingyu.mapper" targetProject="src/main/resources/">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.xingyu.mapper" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <!--
+        <table tableName="sys_params" domainObjectName="SysParams"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true"  >
+            <ignoreColumn column="create_time" delimitedColumnName=""/>
+            <ignoreColumn column="update_time" delimitedColumnName=""/>
+        </table>
+        -->
+
+        <!--
+        <table tableName="sys_dict" domainObjectName="SysDict"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true"  >
+            <ignoreColumn column="create_time" delimitedColumnName=""/>
+            <ignoreColumn column="update_time" delimitedColumnName=""/>
+        </table>
+        -->
+
+        <!--
+        <table tableName="sd_archive_info" domainObjectName="SdArchiveInfo"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true"  >
+            <ignoreColumn column="create_time" delimitedColumnName=""/>
+            <ignoreColumn column="update_time" delimitedColumnName=""/>
+        </table>
+        -->
+        <!--
+        <table tableName="sd_family_info" domainObjectName="SdFamilyInfo"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true"  >
+            <ignoreColumn column="create_time" delimitedColumnName=""/>
+            <ignoreColumn column="update_time" delimitedColumnName=""/>
+        </table>
+        -->
+        <!---->
+        <table tableName="sd_self_info" domainObjectName="SdSelfInfo"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true"  >
+            <ignoreColumn column="create_time" delimitedColumnName=""/>
+            <ignoreColumn column="update_time" delimitedColumnName=""/>
+        </table>
+
+        <!--
+        <table tableName="sd_assess_item" domainObjectName="SdAssessItem"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true"  >
+            <ignoreColumn column="create_time" delimitedColumnName=""/>
+            <ignoreColumn column="update_time" delimitedColumnName=""/>
+        </table>
+        -->
+        <!-- -->
+        <table tableName="sd_assess_times" domainObjectName="SdAssessTimes"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true"  >
+            <ignoreColumn column="create_time" delimitedColumnName=""/>
+            <ignoreColumn column="update_time" delimitedColumnName=""/>
+        </table>
+
+        <!-- -->
+        <table tableName="sd_assess_score" domainObjectName="SdAssessScore"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true"  >
+            <ignoreColumn column="create_time" delimitedColumnName=""/>
+            <ignoreColumn column="update_time" delimitedColumnName=""/>
+        </table>
+
+        <!--
+        <table tableName="teacher" domainObjectName="Teacher"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true"  >
+            <ignoreColumn column="create_time" delimitedColumnName=""/>
+            <ignoreColumn column="update_time" delimitedColumnName=""/>
+        </table>
+        -->
+
+        <!--
+        <table tableName="calss_archive_info" domainObjectName="ClassArchiveInfo"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true"  >
+            <ignoreColumn column="create_time" delimitedColumnName=""/>
+        </table>
+        -->
+
+        <!--
+        <table tableName="calss_member_info" domainObjectName="ClassMemberInfo"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true"  >
+            <ignoreColumn column="create_time" delimitedColumnName=""/>
+        </table>
+        -->
+
+
+    </context>
+</generatorConfiguration>
