@@ -5,7 +5,7 @@ package com.xingyu.domain.po;
  */
 public class SdAssessScoreCnt extends SdAssessTimes{
     private Integer itemId;
-    private String name;
+    private String itemName;
     private String score;
     private Integer scoreCnt;
 
@@ -17,12 +17,12 @@ public class SdAssessScoreCnt extends SdAssessTimes{
         this.itemId = itemId;
     }
 
-    public String getName() {
-        return name;
+    public String getItemName() {
+        return itemName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
     }
 
     public String getScore() {

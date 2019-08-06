@@ -21,7 +21,7 @@ public class SdAssessTimesDto extends SdAssessTimes {
 
     public static class SdAssessScoreCntDto {
         private Integer itemId;
-        private String name;
+        private String itemName;
         private Map<String,Integer> scoreCnt;
 
         public Integer getItemId() {
@@ -32,12 +32,12 @@ public class SdAssessTimesDto extends SdAssessTimes {
             this.itemId = itemId;
         }
 
-        public String getName() {
-            return name;
+        public String getItemName() {
+            return itemName;
         }
 
-        public void setName(String name) {
-            this.name = name;
+        public void setItemName(String itemName) {
+            this.itemName = itemName;
         }
 
         public Map<String, Integer> getScoreCnt() {

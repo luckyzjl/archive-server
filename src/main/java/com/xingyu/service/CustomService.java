@@ -1,8 +1,10 @@
 package com.xingyu.service;
 
 import com.xingyu.base.BizException;
+import com.xingyu.domain.dto.SdAssessCatalogDto;
 import com.xingyu.domain.dto.SdAssessItemDto;
 import com.xingyu.domain.dto.TeacherDto;
+import com.xingyu.domain.po.SdAssessItem;
 
 import java.util.List;
 import java.util.Map;
@@ -14,5 +16,8 @@ public interface CustomService {
 
     List<TeacherDto> getTeacher() throws BizException;
 
-    Map<String, SdAssessItemDto> getSdAssessItem() throws BizException;
+    List<SdAssessCatalogDto> getSdAssessCatalogList() throws BizException;
+
+    String getSdArchiveNo() throws BizException;
+
 }

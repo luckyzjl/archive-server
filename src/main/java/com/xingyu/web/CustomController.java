@@ -32,8 +32,8 @@ public class CustomController extends BaseController {
         return WrapResponse.wrap(customService.getTeacher());
     }
 
-    @RequestMapping(value="/assessItem")
-    public ApiResponse assessItem() throws BizException {
-        return WrapResponse.wrap(customService.getSdAssessItem());
-    }
+//    @RequestMapping(value="/assessItem")
+//    public ApiResponse assessItem() throws BizException {
+//        return WrapResponse.wrap(customService.getSdAssessItem());
+//    }
 }

@@ -57,4 +57,9 @@ public class SysDictCache {
     public void setSysDictMap(Map<String, List<SysDictDto>> sysDictMap) {
         this.sysDictMap = sysDictMap;
     }
+
+    public void refresh() {
+        logger.debug("reload system dict");
+        init();
+    }
 }

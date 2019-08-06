@@ -1,8 +1,6 @@
 package com.xingyu.domain.dto;
 
-import com.xingyu.domain.po.SdArchiveInfo;
-import com.xingyu.domain.po.SdFamilyInfo;
-import com.xingyu.domain.po.SdSelfInfo;
+import com.xingyu.domain.po.*;
 
 import java.util.Date;
 import java.util.List;
@@ -10,8 +8,9 @@ import java.util.List;
 /**
  * created by zhujl @2019-07-19
  */
-public class SdArchiveDto {
+public class SdArchiveDto extends SdAssessTimes {
     private String archiveNo;
+    private String assessTimes;
     private String name;
     private String sex;
     private Date birthTime;
@@ -22,7 +21,15 @@ public class SdArchiveDto {
     private SdArchiveInfo sdArchiveInfo;
     private SdFamilyInfo sdFamilyInfo;
     private SdSelfInfo sdSelfInfo;
-    private List<SdAssessTimesDto> assessTimesDtoList;
+    private List<SdAssessTimes> assessTimesList;            //期数评估列表
+    private List<SdAssessTimesDto> assessTimesDtoList;      //按期数评估记分
+    private List<SdAbilityAnalyse> abilityAnalyseList;      //评估结果分析
+    private List<SdIEPCatalogDto> iepCatalogDtoList;              //IEP计划
+    private List<SdMonthRecord> monthRecordList;                //月教案记录列表
+    private SdTrainningRecord trainningRecord;                  //训练记录
+    private SdProgressDto sdProgressDto;                          //学生学习进度报告
+    private SdYearSummary yearSummary;                          //年度总结
+    private SdEduTrack eduTrack;                                //教育跟踪
 
     public String getArchiveNo() {
         return archiveNo;
@@ -31,6 +38,7 @@ public class SdArchiveDto {
     public void setArchiveNo(String archiveNo) {
         this.archiveNo = archiveNo;
     }
+
 
     public String getName() {
         return name;
@@ -110,5 +118,69 @@ public class SdArchiveDto {
 
     public void setAssessTimesDtoList(List<SdAssessTimesDto> assessTimesDtoList) {
         this.assessTimesDtoList = assessTimesDtoList;
+    }
+
+    public List<SdAbilityAnalyse> getAbilityAnalyseList() {
+        return abilityAnalyseList;
+    }
+
+    public void setAbilityAnalyseList(List<SdAbilityAnalyse> abilityAnalyseList) {
+        this.abilityAnalyseList = abilityAnalyseList;
+    }
+
+    public List<SdIEPCatalogDto> getIepCatalogDtoList() {
+        return iepCatalogDtoList;
+    }
+
+    public void setIepCatalogDtoList(List<SdIEPCatalogDto> iepCatalogDtoList) {
+        this.iepCatalogDtoList = iepCatalogDtoList;
+    }
+
+    public SdTrainningRecord getTrainningRecord() {
+        return trainningRecord;
+    }
+
+    public void setTrainningRecord(SdTrainningRecord trainningRecord) {
+        this.trainningRecord = trainningRecord;
+    }
+
+    public SdProgressDto getSdProgressDto() {
+        return sdProgressDto;
+    }
+
+    public void setSdProgressDto(SdProgressDto sdProgressDto) {
+        this.sdProgressDto = sdProgressDto;
+    }
+
+    public SdYearSummary getYearSummary() {
+        return yearSummary;
+    }
+
+    public void setYearSummary(SdYearSummary yearSummary) {
+        this.yearSummary = yearSummary;
+    }
+
+    public SdEduTrack getEduTrack() {
+        return eduTrack;
+    }
+
+    public void setEduTrack(SdEduTrack eduTrack) {
+        this.eduTrack = eduTrack;
+    }
+
+    public List<SdAssessTimes> getAssessTimesList() {
+        return assessTimesList;
+    }
+
+    public void setAssessTimesList(List<SdAssessTimes> assessTimesList) {
+        this.assessTimesList = assessTimesList;
+    }
+
+    public List<SdMonthRecord> getMonthRecordList() {
+        return monthRecordList;
+    }
+
+    public void setMonthRecordList(List<SdMonthRecord> monthRecordList) {
+        this.monthRecordList = monthRecordList;
     }
 }

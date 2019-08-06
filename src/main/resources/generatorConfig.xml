@@ -49,6 +49,16 @@
         -->
 
         <!--
+        <table tableName="sys_seq" domainObjectName="SysSeq"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true"  >
+            <ignoreColumn column="create_time" delimitedColumnName=""/>
+            <ignoreColumn column="update_time" delimitedColumnName=""/>
+        </table>
+        -->
+
+        <!--
         <table tableName="sd_archive_info" domainObjectName="SdArchiveInfo"
                enableCountByExample="true" enableUpdateByExample="true"
                enableDeleteByExample="true" enableSelectByExample="true"
@@ -66,7 +76,7 @@
             <ignoreColumn column="update_time" delimitedColumnName=""/>
         </table>
         -->
-        <!---->
+        <!--
         <table tableName="sd_self_info" domainObjectName="SdSelfInfo"
                enableCountByExample="true" enableUpdateByExample="true"
                enableDeleteByExample="true" enableSelectByExample="true"
@@ -74,6 +84,7 @@
             <ignoreColumn column="create_time" delimitedColumnName=""/>
             <ignoreColumn column="update_time" delimitedColumnName=""/>
         </table>
+        -->
 
         <!--
         <table tableName="sd_assess_item" domainObjectName="SdAssessItem"
@@ -84,16 +95,8 @@
             <ignoreColumn column="update_time" delimitedColumnName=""/>
         </table>
         -->
-        <!-- -->
-        <table tableName="sd_assess_times" domainObjectName="SdAssessTimes"
-               enableCountByExample="true" enableUpdateByExample="true"
-               enableDeleteByExample="true" enableSelectByExample="true"
-               selectByExampleQueryId="true"  >
-            <ignoreColumn column="create_time" delimitedColumnName=""/>
-            <ignoreColumn column="update_time" delimitedColumnName=""/>
-        </table>
 
-        <!-- -->
+        <!--
         <table tableName="sd_assess_score" domainObjectName="SdAssessScore"
                enableCountByExample="true" enableUpdateByExample="true"
                enableDeleteByExample="true" enableSelectByExample="true"
@@ -101,7 +104,116 @@
             <ignoreColumn column="create_time" delimitedColumnName=""/>
             <ignoreColumn column="update_time" delimitedColumnName=""/>
         </table>
+        -->
 
+        <!--
+        <table tableName="sd_assess_times" domainObjectName="SdAssessTimes"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true"  >
+            <ignoreColumn column="create_time" delimitedColumnName=""/>
+            <ignoreColumn column="update_time" delimitedColumnName=""/>
+        </table>
+        -->
+
+        <!--
+        <table tableName="sd_ability_analyse" domainObjectName="SdAbilityAnalyse"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true"  >
+            <ignoreColumn column="create_time" delimitedColumnName=""/>
+            <ignoreColumn column="update_time" delimitedColumnName=""/>
+        </table>
+        -->
+
+        <!--
+        <table tableName="sd_train_purpose" domainObjectName="SdTrainPurpose"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true"  >
+            <ignoreColumn column="create_time" delimitedColumnName=""/>
+            <ignoreColumn column="update_time" delimitedColumnName=""/>
+        </table>
+        -->
+
+        <!--
+        <table tableName="sd_iep_catalog" domainObjectName="SdIEPCatalog"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true"  >
+            <ignoreColumn column="create_time" delimitedColumnName=""/>
+            <ignoreColumn column="update_time" delimitedColumnName=""/>
+        </table>
+        -->
+
+        <!--
+        <table tableName="sd_iep_item" domainObjectName="SdIEPItem"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true"  >
+            <ignoreColumn column="create_time" delimitedColumnName=""/>
+            <ignoreColumn column="update_time" delimitedColumnName=""/>
+        </table>
+        -->
+
+        <!--
+        <table tableName="sd_trainning_record" domainObjectName="SdTrainningRecord"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true"  >
+            <ignoreColumn column="create_time" delimitedColumnName=""/>
+            <ignoreColumn column="update_time" delimitedColumnName=""/>
+        </table>
+        -->
+
+        <!--
+        <table tableName="sd_progress_report" domainObjectName="SdProgressReport"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true"  >
+            <ignoreColumn column="create_time" delimitedColumnName=""/>
+            <ignoreColumn column="update_time" delimitedColumnName=""/>
+        </table>
+        -->
+
+        <!--
+        <table tableName="sd_month_record" domainObjectName="SdMonthRecord"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true"  >
+            <ignoreColumn column="create_time" delimitedColumnName=""/>
+            <ignoreColumn column="update_time" delimitedColumnName=""/>
+        </table>
+        -->
+
+        <!--
+        <table tableName="sd_lesson_record" domainObjectName="SdLessonRecord"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true"  >
+            <ignoreColumn column="create_time" delimitedColumnName=""/>
+            <ignoreColumn column="update_time" delimitedColumnName=""/>
+        </table>
+        -->
+
+        <!-- -->
+        <table tableName="sd_year_summary" domainObjectName="SdYearSummary"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true"  >
+            <ignoreColumn column="create_time" delimitedColumnName=""/>
+            <ignoreColumn column="update_time" delimitedColumnName=""/>
+        </table>
+
+        <!--
+        <table tableName="sd_edu_track" domainObjectName="SdEduTrack"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true"  >
+            <ignoreColumn column="create_time" delimitedColumnName=""/>
+            <ignoreColumn column="update_time" delimitedColumnName=""/>
+        </table>
+         -->
         <!--
         <table tableName="teacher" domainObjectName="Teacher"
                enableCountByExample="true" enableUpdateByExample="true"

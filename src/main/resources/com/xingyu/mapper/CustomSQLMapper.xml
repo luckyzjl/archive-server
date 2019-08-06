@@ -6,12 +6,13 @@
       批量插入学生评估得分纪录
     -->
   <insert id="listInsertAssessScore" parameterType="java.util.List">
-    insert into sd_assess_score (archive_no,assess_times,item_id,score,remark)
+    insert into sd_assess_score (archive_no,assess_times,item_id,catalog_first,score,remark)
     values
     <foreach collection="assessScoreList" index="index" item="item" separator=",">
       (#{item.archiveNo,jdbcType=VARCHAR},
         #{item.assessTimes,jdbcType=VARCHAR},
         #{item.itemId,jdbcType=INTEGER},
+        #{item.catalogFirst,jdbcType=INTEGER},
         #{item.score,jdbcType=VARCHAR},
         #{item.remark,jdbcType=VARCHAR})
     </foreach>
@@ -31,36 +32,116 @@
     <result column="assess_age" jdbcType="VARCHAR" property="assessAge" />
     <result column="develop_age" jdbcType="VARCHAR" property="developAge" />
     <result column="item_id" jdbcType="INTEGER" property="itemId" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="item_name" jdbcType="VARCHAR" property="itemName" />
     <result column="score" jdbcType="VARCHAR" property="score" />
     <result column="score_cnt" jdbcType="INTEGER" property="scoreCnt" />
   </resultMap>
 
   <select id="statSdAssessScoreAhead" resultMap="SdAssessScoreStatMap" >
-    select a.*,c2.item_id,c2.`name`,b.score,count(b.score) as score_cnt
+    select a.*,c2.item_id,c2.item_name,b.score,count(b.score) as score_cnt
     from sd_assess_times a,sd_assess_score b,sd_assess_item c1,sd_assess_item c2
     where
     <if test="archiveNo != null">
       a.archive_no = #{archiveNo,jdbcType=VARCHAR} and
     </if>
-    a.archive_no=b.archive_no and b.item_id=c1.item_id and c1.catalog_first=c2.item_id
-    and c1.catalog_first in(1,2,3,4,5,6,7)
+    a.archive_no=b.archive_no and a.assess_times=b.assess_times  and b.item_id=c1.item_id
+    and c1.catalog_first=c2.item_id and c1.catalog_first in(1,2,3,4,5,6,7)
     GROUP BY a.assess_times,c2.item_id,b.score
     ORDER BY a.assess_date,c2.item_id;
   </select>
 
 
   <select id="statSdAssessScoreLast" resultMap="SdAssessScoreStatMap" >
-    select a.*,c2.item_id,c2.`name`,b.score,count(b.score) as score_cnt
+    select a.*,c2.item_id,c2.item_name,b.score,count(b.score) as score_cnt
     from sd_assess_times a,sd_assess_score b,sd_assess_item c1,sd_assess_item c2
     where
     <if test="archiveNo != null">
       a.archive_no = #{archiveNo,jdbcType=VARCHAR} and
     </if>
-    a.archive_no=b.archive_no and b.item_id=c1.item_id and c1.catalog_second=c2.item_id
-    and c1.catalog_first = 8
+    a.archive_no=b.archive_no and a.assess_times=b.assess_times and b.item_id=c1.item_id
+    and c1.catalog_second=c2.item_id and c1.catalog_first = 8
     GROUP BY a.assess_times,c2.item_id,b.score
     ORDER BY a.assess_date,c2.item_id;
   </select>
 
+  <!--
+      批量插入学生评估结果分析表
+    -->
+  <insert id="listInsertAbilityAnalyse" parameterType="java.util.List">
+    insert into sd_ability_analyse (archive_no,assess_times,catalog_id,catalog_name,cur_ability,
+    superiority,inferiority,train_purpose)
+    values
+    <foreach collection="abilityAnalyseList" index="index" item="item" separator=",">
+      (
+      #{item.archiveNo,jdbcType=VARCHAR},
+      #{item.assessTimes,jdbcType=VARCHAR},
+      #{item.catalogId,jdbcType=INTEGER},
+      #{item.catalogName,jdbcType=VARCHAR},
+      #{item.curAbility,jdbcType=VARCHAR},
+      #{item.superiority,jdbcType=VARCHAR},
+      #{item.inferiority,jdbcType=VARCHAR},
+      #{item.trainPurpose,jdbcType=VARCHAR}
+      )
+    </foreach>
+  </insert>
+
+  <!--
+      批量插入学生IEP长期目标
+    -->
+  <insert id="listInsertIEPCatalog" parameterType="java.util.List">
+    insert into sd_iep_catalog (archive_no, assess_times,catalog_id,
+    catalog_name, catalog_purpose)
+    values
+    <foreach collection="iepCatalogList" index="index" item="item" separator=",">
+      (
+      #{item.archiveNo,jdbcType=VARCHAR},
+      #{item.assessTimes,jdbcType=VARCHAR},
+      #{item.catalogId,jdbcType=INTEGER},
+      #{item.catalogName,jdbcType=VARCHAR},
+      #{item.catalogPurpose,jdbcType=VARCHAR}
+      )
+    </foreach>
+  </insert>
+
+
+  <!--
+      批量插入学生IEP短期目标
+    -->
+  <insert id="listInsertIEPItem" parameterType="java.util.List">
+    insert into sd_iep_item (archive_no, assess_times,
+    catalog_id, catalog_name, purpose_item_id,
+    purpose_item_name, iep_assess_result, progress_assess_result
+    )
+    values
+    <foreach collection="iepItemList" index="index" item="item" separator=",">
+      (
+      #{item.archiveNo,jdbcType=VARCHAR},
+      #{item.assessTimes,jdbcType=VARCHAR},
+      #{item.catalogId,jdbcType=INTEGER},
+      #{item.catalogName,jdbcType=VARCHAR},
+      #{item.purposeItemId,jdbcType=INTEGER},
+      #{item.purposeItemName,jdbcType=VARCHAR},
+      #{item.iepAssessResult,jdbcType=INTEGER},
+      #{item.progressAssessResult,jdbcType=INTEGER}
+      )
+    </foreach>
+  </insert>
+
+  <!--
+      批量插入学生课时训练内容记录
+    -->
+  <insert id="listInsertLessonRecord" parameterType="java.util.List">
+    insert into sd_lesson_record (archive_no, month,
+    lesson_date, lesson_content, sd_perform)
+    values
+    <foreach collection="lessonRecordList" index="index" item="item" separator=",">
+      (
+      #{item.archiveNo,jdbcType=VARCHAR},
+      #{item.month,jdbcType=VARCHAR},
+      #{item.lessonDate,jdbcType=DATE},
+      #{item.lessonContent,jdbcType=VARCHAR},
+      #{item.sdPerform,jdbcType=VARCHAR}
+      )
+    </foreach>
+  </insert>
 </mapper>
