@@ -1,0 +1,112 @@
+CREATE TABLE `sd_archive_info` (
+  `archive_no` varchar(32) NOT NULL COMMENT '档案编号',
+  `name` varchar(64) NOT NULL COMMENT '学生姓名',
+  `sex` varchar(32) DEFAULT NULL COMMENT '学生性别：男，女',
+  `birth_time` date DEFAULT NULL COMMENT '出生日期',
+  `birth_place` varchar(64) DEFAULT NULL COMMENT '籍贯：温岭籍；非温岭籍',
+  `ID_num` varchar(32) DEFAULT NULL COMMENT '身份证号',
+  `disabler_num` varchar(32) DEFAULT NULL COMMENT '残疾证号',
+  `enroll_time` date DEFAULT NULL COMMENT '入学日期（开始训练时间）',
+  `training_type` varchar(32) DEFAULT NULL COMMENT '康复训练方式：全日制；半日制；一小时',
+  `diagnose_result` varchar(32) DEFAULT NULL COMMENT '诊断结果：孤独症；发育迟缓',
+  `diagnose_time` date DEFAULT NULL COMMENT '诊断时间',
+  `diagnose_organiz` varchar(128) DEFAULT NULL COMMENT '诊断机构',
+  `cur_state` varchar(512) DEFAULT NULL COMMENT '当前障碍情况',
+  `training_his` varchar(512) DEFAULT NULL COMMENT '既往康复训练情况',
+  `status` int(11) DEFAULT NULL COMMENT '学生状态：0-建档；1-入班训练中；2-康复上报；3-注销',
+  `home_address` varchar(512) DEFAULT NULL COMMENT '家庭地址',
+  `live_address` varchar(512) DEFAULT NULL COMMENT '现居住地址',
+  `mobile` varchar(20) DEFAULT NULL COMMENT '联系电话',
+  `end_time` date DEFAULT NULL,
+  `train_result` varchar(64) DEFAULT NULL COMMENT '训练结果',
+  `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
+  `writeoff_time` datetime DEFAULT NULL COMMENT '注销时间',
+  `update_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`archive_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='学生档案表';
+
+
+CREATE TABLE `sd_family_info` (
+  `archive_no` varchar(32) NOT NULL COMMENT '档案编号',
+  `father` varchar(64) DEFAULT NULL COMMENT '父亲姓名',
+  `father_age` int(11) DEFAULT NULL COMMENT '父亲年龄',
+  `father_edu` varchar(64) DEFAULT NULL COMMENT '父亲学历',
+  `father_ID` varchar(32) DEFAULT NULL COMMENT '父亲身份证',
+  `father_mobile` varchar(20) DEFAULT NULL COMMENT '父亲联系方式',
+  `mother` varchar(64) DEFAULT NULL COMMENT '母亲姓名',
+  `mother_age` int(11) DEFAULT NULL COMMENT '母亲年龄',
+  `mother_edu` varchar(64) DEFAULT NULL COMMENT '母亲学历',
+  `mother_ID` varchar(32) DEFAULT NULL COMMENT '母亲身份证',
+  `mother_mobile` varchar(20) DEFAULT NULL COMMENT '母亲联系方式',
+  `other` varchar(64) DEFAULT NULL COMMENT '其他成员',
+  `other_age` int(11) DEFAULT NULL COMMENT '成员年龄',
+  `other_edu` varchar(64) DEFAULT NULL COMMENT '成员学历',
+  `other_ID` varchar(32) DEFAULT NULL COMMENT '其他成员身份证',
+  `other_mobile` varchar(20) DEFAULT NULL COMMENT '联系方式',
+  `family_model` varchar(32) DEFAULT NULL COMMENT '家庭模式：见系统字典表',
+  `live_env` varchar(32) DEFAULT NULL COMMENT '居住环境：见系统字段表',
+  `raising_type` varchar(32) DEFAULT NULL COMMENT '教养方式：见系统字典表',
+  `language_env` varchar(32) DEFAULT NULL COMMENT '语言环境：见系统字典表',
+  `guarder` varchar(32) DEFAULT NULL COMMENT '扶养人：见系统字典表',
+  `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
+  `update_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`archive_no`),
+  KEY `idx_no` (`archive_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='学生家庭信息表';
+
+
+CREATE TABLE `sd_self_info` (
+  `archive_no` varchar(32) NOT NULL,
+  `pregnancy_age` int(11) DEFAULT NULL COMMENT '妊娠年龄',
+  `pregnancy_edu` varchar(256) DEFAULT NULL COMMENT '胎教情况',
+  `abortion_signs` varchar(20) DEFAULT NULL COMMENT '是否先兆流产',
+  `pregnancy_emotion` varchar(256) DEFAULT NULL COMMENT '妊娠心理情绪',
+  `pregnancy_health` varchar(256) DEFAULT NULL COMMENT '孕期生理健康状况',
+  `pregnancy_env` varchar(256) DEFAULT NULL COMMENT '孕期环境状况',
+  `birth_fulltime` varchar(32) DEFAULT NULL COMMENT '分娩是否足月',
+  `birth_process` varchar(256) DEFAULT NULL COMMENT '分娩过程',
+  `birth_mode` varchar(256) DEFAULT NULL COMMENT '分娩方式',
+  `birth_early` varchar(20) DEFAULT NULL COMMENT '是否早产',
+  `birth_stifle` varchar(20) DEFAULT NULL COMMENT '是否窒息',
+  `birth_weight` varchar(32) DEFAULT NULL COMMENT '出生体重',
+  `monther_milk` varchar(20) DEFAULT NULL COMMENT '是否母乳喂养',
+  `manual_milk` varchar(20) DEFAULT NULL COMMENT '是否人工喂养',
+  `fever_convulsion` varchar(20) DEFAULT NULL COMMENT '是否发烧抽搐',
+  `rise_time` varchar(32) DEFAULT NULL COMMENT '会抬头时间',
+  `turnover_time` varchar(32) DEFAULT NULL COMMENT '会翻身时间',
+  `creep_time` varchar(32) DEFAULT NULL COMMENT '会爬时间',
+  `smile_time` varchar(32) DEFAULT NULL COMMENT '会笑时间',
+  `sit_time` varchar(32) DEFAULT NULL COMMENT '会坐时间',
+  `walk_time` varchar(32) DEFAULT NULL COMMENT '会走时间',
+  `voice_time` varchar(32) DEFAULT NULL COMMENT '会发音时间',
+  `word_time` varchar(32) DEFAULT NULL COMMENT '说单词时间',
+  `multiword_time` varchar(32) DEFAULT NULL COMMENT '说多词时间',
+  PRIMARY KEY (`archive_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='学生自身信息表';
+
+
+CREATE TABLE `sd_assess_times` (
+  `archive_no` varchar(32) NOT NULL COMMENT '档案编号',
+  `assess_times` varchar(20) NOT NULL COMMENT '评估期数编号',
+  `assess_date` date DEFAULT NULL COMMENT '评测日期',
+  `sd_age` varchar(32) DEFAULT NULL COMMENT '评测时年龄',
+  `assess_teacher` varchar(32) DEFAULT NULL COMMENT '评测老师',
+  `assess_age` varchar(32) DEFAULT NULL COMMENT '评估年龄',
+  `develop_age` varchar(32) DEFAULT NULL COMMENT '发展年龄',
+  `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
+  `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`archive_no`,`assess_times`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='每一期评估概要信息表'
+
+
+CREATE TABLE `sd_assess_score` (
+  `archive_no` varchar(32) NOT NULL COMMENT '档案编号',
+  `assess_times` varchar(20) NOT NULL COMMENT '评估期数编号',
+  `item_id` int(11) NOT NULL COMMENT '评估项目编号',
+  `catalog_first` int(11) DEFAULT NULL COMMENT '评估所属大项',
+  `score` varchar(20) DEFAULT NULL COMMENT '得分',
+  `remark` varchar(512) DEFAULT NULL COMMENT '备注',
+  `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
+  `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`archive_no`,`assess_times`,`item_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='学生评估项目得分表'
