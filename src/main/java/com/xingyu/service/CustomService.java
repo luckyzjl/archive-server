@@ -20,4 +20,6 @@ public interface CustomService {
 
     String getSdArchiveNo() throws BizException;
 
+    String getClassArchiveNo() throws BizException;
+
 }

@@ -130,4 +130,28 @@ public class CustomServiceImpl implements CustomService {
         return sdArchiveNo;
     }
 
+    @Override
+    public String getClassArchiveNo() throws BizException{
+        String strDate = DateFormatUtils.format(new Date(),"yyyy");
+        SysSeq archiveNoSeq = sysSeqMapper.selectByPrimaryKey("classArchiveNo");
+        String classArchiveNo = strDate + "001";
+        SysSeq sysSeq = new SysSeq();
+        sysSeq.setSeqName("classArchiveNo");
+        if (null == archiveNoSeq){
+            classArchiveNo = strDate + "001";
+            sysSeq.setSeq(classArchiveNo);
+            sysSeqMapper.insertSelective(sysSeq);
+        }else if (!archiveNoSeq.getSeq().startsWith(strDate)){
+            classArchiveNo = strDate + "001";
+            sysSeq.setSeq(classArchiveNo);
+            sysSeqMapper.updateByPrimaryKey(sysSeq);
+        }else if (archiveNoSeq.getSeq().startsWith(strDate)){
+            classArchiveNo = String.valueOf(Integer.parseInt(archiveNoSeq.getSeq()) + 1);
+            sysSeq.setSeq(classArchiveNo);
+            sysSeqMapper.updateByPrimaryKey(sysSeq);
+        }
+
+        return classArchiveNo;
+    }
+
 }

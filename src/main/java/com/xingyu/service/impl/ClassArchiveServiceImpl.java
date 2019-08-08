@@ -7,6 +7,7 @@ import com.xingyu.mapper.ClassArchiveInfoMapper;
 import com.xingyu.mapper.ClassMemberInfoMapper;
 import com.xingyu.mapper.CustomSQLMapper;
 import com.xingyu.service.ClassArchiveService;
+import com.xingyu.service.CustomService;
 import com.xingyu.service.SDArchiveService;
 import com.xingyu.wrapper.ApiResponse;
 import org.apache.commons.lang3.time.DateFormatUtils;
@@ -29,6 +30,8 @@ public class ClassArchiveServiceImpl implements ClassArchiveService {
     private static Log logger = LogFactory.getLog(ClassArchiveService.class);
 
     @Autowired
+    CustomService customService;
+    @Autowired
     ClassArchiveInfoMapper classArchiveInfoMapper;
     @Autowired
     ClassMemberInfoMapper classMemberInfoMapper;
@@ -46,6 +49,8 @@ public class ClassArchiveServiceImpl implements ClassArchiveService {
         if (null == classArchiveInfo || TextUtils.isBlank(classArchiveInfo.getClassName())){
             throw new BizException(BizException.CODE_PARAM_LACK,"缺少参数：班级名称");
         }
+        String archiveNo = customService.getClassArchiveNo();
+        classArchiveInfo.setArchiveNo(archiveNo);
         classArchiveInfoMapper.insertSelective(classArchiveInfo);
         if (null != sdArchiveNoList && sdArchiveNoList.size() > 0){
             this.sdJoinClass(classArchiveInfo.getArchiveNo(),sdArchiveNoList);
