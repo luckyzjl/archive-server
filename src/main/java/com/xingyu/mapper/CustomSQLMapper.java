@@ -39,4 +39,9 @@ public interface CustomSQLMapper {
      * 批量插入学生课时训练内容记录
      */
     int listInsertLessonRecord(@Param("lessonRecordList") List<SdLessonRecord> lessonRecordList);
+
+    /**
+     * 批量插入班级学生关系表
+     */
+    int listInsertClassMember(@Param("classMemberList") List<ClassMemberInfo> classMemberList);
 }

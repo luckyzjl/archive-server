@@ -18,11 +18,14 @@ public interface SDArchiveService {
      * 学生建档，查询，修改
      */
     void newStudentArchive(String sdArchiveNo,SdArchiveInfo sdArchiveInfo, SdFamilyInfo sdFamilyInfo) throws BizException;
-    SdArchiveDto getStudentArchiveInfo(String archiveNo) throws BizException;
-    List<SdArchiveInfo> getStudentArchiveList(Integer pageNo,Integer pageSize,SdArchiveInfo sdArchiveVo) throws BizException;
-    //获取分页信息
-    ApiResponse.PageInfo getSDArchivePageInfo(ReqParameter reqParameter, SdArchiveInfo sdArchiveVo) throws BizException;
     void updateStudentArchiveInfo(String sdArchiveNo,SdArchiveInfo sdArchiveInfo,SdFamilyInfo sdFamilyInfo) throws BizException;
+    SdArchiveDto getStudentArchiveInfo(String archiveNo) throws BizException;
+    //获取分页信息
+    ApiResponse.PageInfo getSDArchivePageInfo(Integer pageNo,Integer pageSize, SdArchiveInfo sdArchiveVo) throws BizException;
+    List<SdArchiveInfo> getStudentArchiveList(Integer pageNo,Integer pageSize,SdArchiveInfo sdArchiveVo) throws BizException;
+    List<SdArchiveInfo> getStudentArchiveList(List<String> sdNoList) throws BizException;
+
+
 
     /**
      * 学生入学登记：家庭信息/自身信息

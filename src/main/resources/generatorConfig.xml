@@ -196,7 +196,7 @@
         </table>
         -->
 
-        <!-- -->
+        <!--
         <table tableName="sd_year_summary" domainObjectName="SdYearSummary"
                enableCountByExample="true" enableUpdateByExample="true"
                enableDeleteByExample="true" enableSelectByExample="true"
@@ -204,7 +204,7 @@
             <ignoreColumn column="create_time" delimitedColumnName=""/>
             <ignoreColumn column="update_time" delimitedColumnName=""/>
         </table>
-
+        -->
         <!--
         <table tableName="sd_edu_track" domainObjectName="SdEduTrack"
                enableCountByExample="true" enableUpdateByExample="true"
@@ -224,23 +224,25 @@
         </table>
         -->
 
-        <!--
-        <table tableName="calss_archive_info" domainObjectName="ClassArchiveInfo"
+        <!-- -->
+        <table tableName="class_archive_info" domainObjectName="ClassArchiveInfo"
                enableCountByExample="true" enableUpdateByExample="true"
                enableDeleteByExample="true" enableSelectByExample="true"
                selectByExampleQueryId="true"  >
+            <generatedKey column="coupon_id" sqlStatement="MySql" identity="true"/>
             <ignoreColumn column="create_time" delimitedColumnName=""/>
+            <ignoreColumn column="update_time" delimitedColumnName=""/>
         </table>
-        -->
 
-        <!--
-        <table tableName="calss_member_info" domainObjectName="ClassMemberInfo"
+
+        <!-- -->
+        <table tableName="class_member_info" domainObjectName="ClassMemberInfo"
                enableCountByExample="true" enableUpdateByExample="true"
                enableDeleteByExample="true" enableSelectByExample="true"
                selectByExampleQueryId="true"  >
             <ignoreColumn column="create_time" delimitedColumnName=""/>
+            <ignoreColumn column="update_time" delimitedColumnName=""/>
         </table>
-        -->
 
 
     </context>

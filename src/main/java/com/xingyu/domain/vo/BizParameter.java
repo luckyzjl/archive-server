@@ -12,7 +12,10 @@ import java.util.PrimitiveIterator;
  * created by zhujl @2019-07-18
  */
 public class BizParameter {
+
     private String archiveNo;
+
+    //学生
     private String assessTimes;
     private String month;
     private Integer assessCatalog;
@@ -28,6 +31,10 @@ public class BizParameter {
     private SdMonthRecordDto sdMonthRecordDto;
     private SdYearSummary sdYearSummary;
     private SdEduTrack sdEduTrack;
+
+    //班级
+    List<String> sdArchiveNos;
+    private ClassArchiveInfo classArchiveInfo;
 
     public String getArchiveNo() {
         return archiveNo;
@@ -155,5 +162,22 @@ public class BizParameter {
 
     public void setSdEduTrack(SdEduTrack sdEduTrack) {
         this.sdEduTrack = sdEduTrack;
+    }
+
+
+    public List<String> getSdArchiveNos() {
+        return sdArchiveNos;
+    }
+
+    public void setSdArchiveNos(List<String> sdArchiveNos) {
+        this.sdArchiveNos = sdArchiveNos;
+    }
+
+    public ClassArchiveInfo getClassArchiveInfo() {
+        return classArchiveInfo;
+    }
+
+    public void setClassArchiveInfo(ClassArchiveInfo classArchiveInfo) {
+        this.classArchiveInfo = classArchiveInfo;
     }
 }

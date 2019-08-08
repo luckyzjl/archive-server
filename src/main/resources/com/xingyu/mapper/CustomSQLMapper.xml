@@ -144,4 +144,19 @@
       )
     </foreach>
   </insert>
+
+  <!--
+      批量插入班级学生关系表
+    -->
+  <insert id="listInsertClassMember" parameterType="java.util.List">
+    insert into class_member_info (class_id, sd_no, join_time)
+    values
+    <foreach collection="classMemberList" index="index" item="item" separator=",">
+      (
+      #{item.classId,jdbcType=INTEGER},
+      #{item.sdNo,jdbcType=VARCHAR},
+      #{item.joinTime,jdbcType=DATE}
+      )
+    </foreach>
+  </insert>
 </mapper>

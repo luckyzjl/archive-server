@@ -57,7 +57,7 @@ public class SDArchiveBmsController extends BaseController {
         ReqParameter reqParameter = RequestFacade.getParameters();
         BizParameter bizParameter = RequestFacade.getBizParameters();
         List<SdArchiveInfo> sdArchiveList = sdArchiveService.getStudentArchiveList(reqParameter.getPageNo(),reqParameter.getPageSize(),bizParameter.getSdArchiveInfo());
-        return WrapResponse.wrap(sdArchiveList,sdArchiveService.getSDArchivePageInfo(reqParameter,bizParameter.getSdArchiveInfo()));
+        return WrapResponse.wrap(sdArchiveList,sdArchiveService.getSDArchivePageInfo(reqParameter.getPageNo(),reqParameter.getPageSize(),bizParameter.getSdArchiveInfo()));
     }
 
     /**

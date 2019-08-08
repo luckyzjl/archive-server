@@ -87,6 +87,22 @@ public class SDArchiveServiceImpl implements SDArchiveService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void updateStudentArchiveInfo(String archiveNo,SdArchiveInfo sdArchiveInfo,SdFamilyInfo sdFamilyInfo) throws BizException{
+        if (TextUtils.isBlank(archiveNo)){
+            throw new BizException(BizException.CODE_PARAM_LACK,"【缺少参数：档案编号】");
+        }
+        if (null != sdArchiveInfo){
+            sdArchiveInfo.setArchiveNo(archiveNo);
+            sdArchiveInfoMapper.updateByPrimaryKeySelective(sdArchiveInfo);
+        }
+        if (null != sdFamilyInfo){
+            sdFamilyInfo.setArchiveNo(archiveNo);
+            sdFamilyInfoMapper.updateByPrimaryKeySelective(sdFamilyInfo);
+        }
+    }
+
+    @Override
     public SdArchiveDto getStudentArchiveInfo(String sdArchiveNo) throws BizException{
         if (TextUtils.isBlank(sdArchiveNo)){
             throw new BizException(BizException.CODE_PARAM_LACK,"【缺少参数：档案编号】");
@@ -116,12 +132,40 @@ public class SDArchiveServiceImpl implements SDArchiveService {
                     Date date = DateUtils.parseDate(DateFormatUtils.format(sdArchiveVo.getEnrollTime(), "yyyy"), "yyyy");
                     criteria.andEnrollTimeBetween(date, DateUtils.addYears(date, 1));
                 }
+                if (!TextUtils.isBlank(sdArchiveVo.getBirthPlace())){
+                    criteria.andBirthPlaceEqualTo(sdArchiveVo.getBirthPlace());
+                }
+                if (!TextUtils.isBlank(sdArchiveVo.getTrainingType())){
+                    criteria.andTrainingTypeEqualTo(sdArchiveVo.getTrainingType());
+                }
+                if (null != sdArchiveVo.getEnrollTime()){
+                    criteria.andEnrollTimeGreaterThanOrEqualTo(sdArchiveVo.getEnrollTime());
+                }
+                if (null != sdArchiveVo.getEndTime()){
+                    criteria.andEndTimeLessThanOrEqualTo(sdArchiveVo.getEndTime());
+                }
+                if (null != sdArchiveVo.getStatus()){
+                    criteria.andStatusEqualTo(sdArchiveVo.getStatus());
+                }
             }
             return example;
         }catch (Exception ex){
             logger.error("学生档案查询出错",ex);
             throw new BizException(BizException.CODE_SYSTEM_ERROR,BizException.MSG_SYSTEM_ERROR);
         }
+    }
+
+    @Override
+    public ApiResponse.PageInfo getSDArchivePageInfo(Integer pageNo,Integer pageSize,SdArchiveInfo sdArchiveVo) throws BizException{
+        int recordAmount = sdArchiveInfoMapper.countByExample(_getSdArchiveQueryExample(sdArchiveVo));
+        if (null == pageNo) pageNo = 1;
+        if (null == pageSize) pageSize = 10;
+        ApiResponse.PageInfo pageInfo = new ApiResponse.PageInfo();
+        pageInfo.setRecordAmount(recordAmount);
+        pageInfo.setPageNo(pageNo);
+        pageInfo.setPageSize(pageSize);
+        pageInfo.setPageAmount((recordAmount == 0 || recordAmount % pageSize == 0) ? recordAmount / pageSize : recordAmount / pageSize + 1);
+        return pageInfo;
     }
 
     @Override
@@ -134,30 +178,15 @@ public class SDArchiveServiceImpl implements SDArchiveService {
     }
 
     @Override
-    public ApiResponse.PageInfo getSDArchivePageInfo(ReqParameter reqParameter,SdArchiveInfo sdArchiveVo) throws BizException{
-        int recordAmount = sdArchiveInfoMapper.countByExample(_getSdArchiveQueryExample(sdArchiveVo));
-        ApiResponse.PageInfo pageInfo = new ApiResponse.PageInfo();
-        pageInfo.setRecordAmount(recordAmount);
-        pageInfo.setPageNo(reqParameter.getPageNo());
-        pageInfo.setPageSize(reqParameter.getPageSize());
-        pageInfo.setPageAmount((recordAmount == 0 || recordAmount % reqParameter.getPageSize() == 0) ? recordAmount / reqParameter.getPageSize() : recordAmount / reqParameter.getPageSize() + 1);
-        return pageInfo;
-    }
-
-    @Override
-    @Transactional(rollbackFor = Exception.class)
-    public void updateStudentArchiveInfo(String archiveNo,SdArchiveInfo sdArchiveInfo,SdFamilyInfo sdFamilyInfo) throws BizException{
-        if (TextUtils.isBlank(archiveNo)){
-            throw new BizException(BizException.CODE_PARAM_LACK,"【缺少参数：档案编号】");
+    public List<SdArchiveInfo> getStudentArchiveList(List<String> sdNoList) throws BizException{
+        if (null == sdNoList || sdNoList.size() == 0){
+            return new ArrayList<>();
         }
-        if (null != sdArchiveInfo){
-            sdArchiveInfo.setArchiveNo(archiveNo);
-            sdArchiveInfoMapper.updateByPrimaryKeySelective(sdArchiveInfo);
-        }
-        if (null != sdFamilyInfo){
-            sdFamilyInfo.setArchiveNo(archiveNo);
-            sdFamilyInfoMapper.updateByPrimaryKeySelective(sdFamilyInfo);
-        }
+        SdArchiveInfoExample example = new SdArchiveInfoExample();
+        SdArchiveInfoExample.Criteria criteria = example.createCriteria();
+        criteria.andArchiveNoIn(sdNoList);
+        example.setOrderByClause("archive_no desc");
+        return sdArchiveInfoMapper.selectByExample(example);
     }
 
 
