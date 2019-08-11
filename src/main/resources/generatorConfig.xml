@@ -63,6 +63,7 @@
                enableCountByExample="true" enableUpdateByExample="true"
                enableDeleteByExample="true" enableSelectByExample="true"
                selectByExampleQueryId="true"  >
+               <generatedKey column="archive_no" sqlStatement="MySql" identity="true"/>
             <ignoreColumn column="create_time" delimitedColumnName=""/>
             <ignoreColumn column="update_time" delimitedColumnName=""/>
         </table>
@@ -229,7 +230,7 @@
                enableCountByExample="true" enableUpdateByExample="true"
                enableDeleteByExample="true" enableSelectByExample="true"
                selectByExampleQueryId="true"  >
-            <generatedKey column="coupon_id" sqlStatement="MySql" identity="true"/>
+            <generatedKey column="archive_no" sqlStatement="MySql" identity="true"/>
             <ignoreColumn column="create_time" delimitedColumnName=""/>
             <ignoreColumn column="update_time" delimitedColumnName=""/>
         </table>

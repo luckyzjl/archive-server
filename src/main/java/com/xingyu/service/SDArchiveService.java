@@ -17,7 +17,7 @@ public interface SDArchiveService {
     /**
      * 学生建档，查询，修改
      */
-    void newStudentArchive(String sdArchiveNo,SdArchiveInfo sdArchiveInfo, SdFamilyInfo sdFamilyInfo) throws BizException;
+    String newStudentArchive(String sdArchiveNo,SdArchiveInfo sdArchiveInfo, SdFamilyInfo sdFamilyInfo) throws BizException;
     void updateStudentArchiveInfo(String sdArchiveNo,SdArchiveInfo sdArchiveInfo,SdFamilyInfo sdFamilyInfo) throws BizException;
     SdArchiveDto getStudentArchiveInfo(String archiveNo) throws BizException;
     //获取分页信息

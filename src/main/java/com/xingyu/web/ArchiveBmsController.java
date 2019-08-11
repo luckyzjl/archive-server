@@ -1,9 +1,11 @@
 package com.xingyu.web;
 
 import com.xingyu.base.BizException;
+import com.xingyu.domain.dto.ClassArchiveDto;
 import com.xingyu.domain.vo.BizParameter;
 import com.xingyu.domain.vo.ReqParameter;
 import com.xingyu.domain.po.SdArchiveInfo;
+import com.xingyu.service.ClassArchiveService;
 import com.xingyu.service.SDArchiveService;
 import com.xingyu.wrapper.ApiResponse;
 import com.xingyu.wrapper.WrapResponse;
@@ -21,10 +23,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value="/archive/bms")
-public class SDArchiveBmsController extends BaseController {
+public class ArchiveBmsController extends BaseController {
 
     @Autowired
     SDArchiveService sdArchiveService;
+    @Autowired
+    ClassArchiveService classArchiveService;
 
     /**
      * 学生建档，查询，修改
@@ -33,8 +37,7 @@ public class SDArchiveBmsController extends BaseController {
     public ApiResponse newSDArchive() throws BizException{
         ReqParameter reqParameter = RequestFacade.getParameters();
         BizParameter bizParameter = RequestFacade.getBizParameters();
-        sdArchiveService.newStudentArchive(bizParameter.getArchiveNo(),bizParameter.getSdArchiveInfo(),bizParameter.getSdFamilyInfo());
-        return WrapResponse.wrapSuccess();
+        return WrapResponse.wrap(sdArchiveService.newStudentArchive(bizParameter.getArchiveNo(),bizParameter.getSdArchiveInfo(),bizParameter.getSdFamilyInfo()));
     }
 
     @RequestMapping(value="/sd/update")
@@ -82,6 +85,12 @@ public class SDArchiveBmsController extends BaseController {
     /**
      * 学生评估记分：评估记分，统计
      */
+    @RequestMapping(value="/sdassess/times/list")
+    public ApiResponse getSdAssessTimesList() throws BizException{
+        ReqParameter reqParameter = RequestFacade.getParameters();
+        BizParameter bizParameter = RequestFacade.getBizParameters();
+        return WrapResponse.wrap(sdArchiveService.getSdAssessTimesList(bizParameter.getArchiveNo()));
+    }
 
     @RequestMapping(value="/sdassess/times/submit")
     public ApiResponse submitSdAssessTimes() throws BizException{
@@ -266,5 +275,39 @@ public class SDArchiveBmsController extends BaseController {
         BizParameter bizParameter = RequestFacade.getBizParameters();
         sdArchiveService.submitSdEduTrack(bizParameter.getArchiveNo(),bizParameter.getSdEduTrack());
         return WrapResponse.wrapSuccess();
+    }
+
+    /**
+     * 班级建档，查询，修改
+     */
+    @PostMapping(value="/class/new")
+    public ApiResponse newClassArchive() throws BizException {
+        ReqParameter reqParameter = RequestFacade.getParameters();
+        BizParameter bizParameter = RequestFacade.getBizParameters();
+        classArchiveService.newClassArchiveInfo(bizParameter.getClassArchiveInfo(),bizParameter.getSdArchiveNos());
+        return WrapResponse.wrapSuccess();
+    }
+
+    @RequestMapping(value="/class/update")
+    public ApiResponse updateClassArchiveInfo() throws BizException{
+        ReqParameter reqParameter = RequestFacade.getParameters();
+        BizParameter bizParameter = RequestFacade.getBizParameters();
+        classArchiveService.updateClassArchiveInfo(bizParameter.getClassArchiveInfo(),bizParameter.getSdArchiveNos());
+        return WrapResponse.wrapSuccess();
+    }
+
+    @RequestMapping(value="/class/info")
+    public ApiResponse getClassArchiveInfo() throws BizException{
+        ReqParameter reqParameter = RequestFacade.getParameters();
+        BizParameter bizParameter = RequestFacade.getBizParameters();
+        return WrapResponse.wrap(classArchiveService.getClassArchiveInfo(bizParameter.getArchiveNo()));
+    }
+
+    @RequestMapping(value="/class/list")
+    public ApiResponse getClassArchiveList() throws BizException{
+        ReqParameter reqParameter = RequestFacade.getParameters();
+        BizParameter bizParameter = RequestFacade.getBizParameters();
+        List<ClassArchiveDto> classArchiveList = classArchiveService.getClassArchiveList(reqParameter.getPageNo(),reqParameter.getPageSize(),bizParameter.getClassArchiveInfo());
+        return WrapResponse.wrap(classArchiveList,classArchiveService.getClassArchivePageInfo(reqParameter.getPageNo(),reqParameter.getPageSize(),bizParameter.getClassArchiveInfo()));
     }
 }

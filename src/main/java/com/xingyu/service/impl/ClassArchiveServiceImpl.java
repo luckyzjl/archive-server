@@ -189,7 +189,7 @@ public class ClassArchiveServiceImpl implements ClassArchiveService {
             }
             classArchiveDtoMap.get(classNo).setSdCount(sdCount);
             classArchiveDtoMap.get(classNo).setRecureSdCount(recureSdCount);
-            classArchiveDtoMap.get(classNo).setSdArchiveInfoList(memberListByClassMap.get(classNo));
+//            classArchiveDtoMap.get(classNo).setSdArchiveInfoList(memberListByClassMap.get(classNo));
         }
         return classArchiveDtoList;
     }

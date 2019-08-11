@@ -72,18 +72,22 @@ public class SDArchiveServiceImpl implements SDArchiveService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void newStudentArchive(String sdArchiveNo, SdArchiveInfo sdArchiveInfo,SdFamilyInfo sdFamilyInfo) throws BizException{
+    public String newStudentArchive(String sdArchiveNo, SdArchiveInfo sdArchiveInfo,SdFamilyInfo sdFamilyInfo) throws BizException{
         if (TextUtils.isBlank(sdArchiveNo)){
             sdArchiveNo = customService.getSdArchiveNo();
         }
-        if (null != sdArchiveInfo){
-            sdArchiveInfo.setArchiveNo(sdArchiveNo);
-            sdArchiveInfoMapper.insertSelective(sdArchiveInfo);
+        if (null == sdArchiveInfo){
+            sdArchiveInfo = new SdArchiveInfo();
         }
+        sdArchiveInfo.setArchiveNo(sdArchiveNo);
+        sdArchiveInfoMapper.insertSelective(sdArchiveInfo);
         if (null != sdFamilyInfo){
             sdFamilyInfo.setArchiveNo(sdArchiveNo);
             sdFamilyInfoMapper.insertSelective(sdFamilyInfo);
         }
+
+        return sdArchiveInfo.getArchiveNo();
+
     }
 
     @Override
@@ -386,11 +390,12 @@ public class SDArchiveServiceImpl implements SDArchiveService {
 
         //组装返回数据结构
         List<SdAssessTimesDto> assessTimesDtoList = new ArrayList<>();
-        for (int i=1;i<=3;i++){
+        for (int i=1;i<=4;i++){
             String strTimes = "";
             if (1==i) strTimes = "第一次";
             else if (2==i) strTimes = "第二次";
             else if (3==i) strTimes = "第三次";
+            else if (4==i) strTimes = "第四次";
             SdAssessTimesDto assessTimesDto = new SdAssessTimesDto();
             //第一层次统计
             for (SdAssessItem assessItem:sdAssessItemCache.getCatalogFirstList()){
@@ -513,6 +518,9 @@ public class SDArchiveServiceImpl implements SDArchiveService {
             throw new BizException(BizException.CODE_PARAM_LACK, "缺少参数:sdArchiveNo/assessTimes");
         }
         for (SdAbilityAnalyse sdAbilityAnalyse:sdAbilityAnalyseList) {
+            if (sdAbilityAnalyse.getCatalogId() == 999){
+                sdAbilityAnalyse.setCatalogName("其他生活环境");
+            }
             if (TextUtils.isBlank(sdAbilityAnalyse.getCatalogName()) || null == sdAbilityAnalyse.getCatalogId()) {
                 throw new BizException(BizException.CODE_PARAM_LACK, "缺少参数:catalogId/catalogName");
             }
